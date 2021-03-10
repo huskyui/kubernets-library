@@ -1,0 +1,25 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javaweb-2
+spec:
+  initContainers:
+    - image: huskyui/hello-world-war:latest
+      name: war
+      command: ["cp", "/tmp/hello-world-war-0.0.1.war", "/app"]
+      volumeMounts:
+        - mountPath: /app
+          name: app-volume
+  containers:
+    - image: tomcat:9.0
+      name: tomcat
+      volumeMounts:
+        - mountPath: /usr/local/tomcat/webapps
+          name: app-volume
+      ports:
+        - containerPort: 8080
+          hostPort: 8001
+  volumes:
+    - name: app-volume
+      emptyDir: {}

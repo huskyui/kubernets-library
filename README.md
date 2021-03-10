@@ -36,3 +36,6 @@ depoly the war file to tomcat. user initContainers
 
 shared data in the pod
 
+#### war-tomcat-deployment
+
+我们打包时将war包打包到image中去，之后在运行pod时，通过initContainers将war拷贝至特定路径，并将该路径于containers 共享同一块volume。可以实现不需要打包频繁打包至tomcat中
